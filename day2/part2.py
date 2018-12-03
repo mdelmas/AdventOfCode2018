@@ -15,6 +15,11 @@ def common_char(id1, id2) :
             common += char
     return common
 
+for id1 in data :
+    for id2 in data :
+        if id_difference(id1, id2) == 1 :
+            print(common_char(id1, id2))
+            exit()
 # possible improvements
 
 # use zip(id1, id2)
