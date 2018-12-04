@@ -1,6 +1,6 @@
 import re
 import numpy
-file = open("./input.txt")
+file = open("./example.txt")
 
 def parse_data(line) :
     value = re.match("#\d+ @ (\d+),(\d+): (\d+)x(\d+)", line)
