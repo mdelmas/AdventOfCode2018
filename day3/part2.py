@@ -33,14 +33,34 @@ for claim in data :
     line = list(range(claim["coord"][0], claim["coord"][0] + claim["dim"][0]))
     col = list(range(claim["coord"][1], claim["coord"][1] + claim["dim"][1]))
     for x, y in list(itertools.product(line, col)) :
-        if claim['overlap'] == False and grid[y][x] == 0 :
-            grid[y][x] = claim["id"]
-        else if grid[y][x] > 0 :
-            grid[grid == grid[y][x]] = -1
-            grid[grid == claim["id"]] = -1
-            grid[y][x] = -1
-            claim['overlap'] = True
-        else :
-            grid[y][x] = -1
+        grid[y][x] += 1
 
-print("Result : " + str(grid.max()))
+### faster solution
+for claim in data :
+    line = list(range(claim["coord"][0], claim["coord"][0] + claim["dim"][0]))
+    col = list(range(claim["coord"][1], claim["coord"][1] + claim["dim"][1]))
+    no_overlap = True
+    for x, y in list(itertools.product(line, col)) :
+        if grid[y][x] != 1 :
+            no_overlap = False
+            break
+    if no_overlap :
+        print(claim["id"])
+        exit()
+
+
+### first solution
+# for claim in data :
+#     line = list(range(claim["coord"][0], claim["coord"][0] + claim["dim"][0]))
+#     col = list(range(claim["coord"][1], claim["coord"][1] + claim["dim"][1]))
+#     for x, y in list(itertools.product(line, col)) :
+#         if claim['overlap'] == False and grid[y][x] == 0 :
+#             grid[y][x] = claim["id"]
+#         else if grid[y][x] > 0 :
+#             grid[grid == grid[y][x]] = -1
+#             grid[grid == claim["id"]] = -1
+#             grid[y][x] = -1
+#             claim['overlap'] = True
+#         else :
+#             grid[y][x] = -1
+# print("Result : " + str(grid.max()))
